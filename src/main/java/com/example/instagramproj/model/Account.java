@@ -1,5 +1,7 @@
 package com.example.instagramproj.model;
 
+import javafx.scene.image.Image;
+
 import java.util.*;
 
 public class Account  {
@@ -32,6 +34,7 @@ public class Account  {
     private String password;
     private String email;
     private String phoneNumber;
+    private Image profile;
 
 
     private final List<Account> followers = new ArrayList<>();
@@ -41,12 +44,14 @@ public class Account  {
     private final List<Post> posts = new ArrayList<>();
     private final List<Post> archivePost = new ArrayList<>();
     private final List<Post> saved = new ArrayList<>();
+    private String bio;
 
     private Story story;
 
 
     private final Map<Post, List<Comment>> allComments = new HashMap<>();
     private final List<Story> archiveStory = new ArrayList<>();
+    private final List<String> links = new ArrayList<>();
 
 
     public String getUsername() {
@@ -59,6 +64,21 @@ public class Account  {
 
     public String getName() {
         return name;
+    }
+    public String getBio(){
+        return this.bio;
+    }
+    public void setBio(String bio){
+        this.bio = bio;
+    }
+    public List<String> getLinks(){
+        return this.links;
+    }
+    public Image getProfile(){
+        return this.profile;
+    }
+    public void setProfile(Image profile){
+        this.profile = profile;
     }
 
     public void setName(String name) {
@@ -77,17 +97,11 @@ public class Account  {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public List<Account> getFollowers() {
         return followers;

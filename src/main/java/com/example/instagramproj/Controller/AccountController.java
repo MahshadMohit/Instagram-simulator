@@ -1,6 +1,7 @@
 package com.example.instagramproj.Controller;
 
 import com.example.instagramproj.model.Account;
+import javafx.scene.image.Image;
 
 import java.util.*;
 
@@ -43,6 +44,16 @@ public class AccountController {
         return false;
     }
 
+    public boolean forgetAccount(String username , int phoneNumber){
+        for (Account ac : accounts){
+            if (ac.getUsername().equals(username)){
+                // TODO : function to send code to phonenumber
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     // add and remove other follower or following
 
@@ -73,6 +84,50 @@ public class AccountController {
     }
     public void removeCloseFriend(Account a , Account b){
         a.getCloseFriends().remove(b);
+    }
+
+
+    public void editProfile(Account account , Image img){
+        for (Account ac : accounts){
+            if (ac.equals(account)){
+                ac.setProfile(img);
+            }
+        }
+    }
+    public void editUsername(Account account , String username){
+        for (Account ac : accounts){
+            if (ac.equals(account)){
+                ac.setUsername(username);
+            }
+        }
+    }
+    public void editBio(Account account,String bio){
+        for (Account ac : accounts){
+            if (ac.equals(account)) {
+                ac.setBio(bio);
+            }
+        }
+    }
+    public void editPassword(Account account , String password){
+        for (Account ac : accounts){
+            if (ac.equals(account)){
+                ac.setPassword(password);
+            }
+        }
+    }
+    public void addLink(Account account , String link){
+        for (Account ac : accounts){
+            if (ac.equals(account)){
+                ac.getLinks().add(link);
+            }
+        }
+    }
+    public void removeLink(Account account,String link){
+        for (Account ac : accounts){
+            if (ac.equals(account)){
+                ac.getLinks().remove(link);
+            }
+        }
     }
 
 
