@@ -7,7 +7,8 @@ public class Account {
     public Account() {
 
     }
-    public Account(String username){
+
+    public Account(String username) {
         this.username = username;
     }
 
@@ -22,11 +23,14 @@ public class Account {
     private final List<Account> following = new ArrayList<>();
     private final List<Account> closeFriends = new ArrayList<>();
     private final List<Post> posts = new ArrayList<>();
-    private final List<Post> archive = new ArrayList<>();
+    private final List<Post> archivePost = new ArrayList<>();
     private final List<Post> saved = new ArrayList<>();
 
+    private Story story;
 
-    private final Map<Post,List<Comment>> allComments = new HashMap<>();
+
+    private final Map<Post, List<Comment>> allComments = new HashMap<>();
+    private final List<Story> archiveStory = new ArrayList<>();
 
 
     public String getUsername() {
@@ -85,8 +89,12 @@ public class Account {
         return closeFriends;
     }
 
-    public List<Post> getArchive() {
-        return archive;
+    public List<Post> getArchivePost() {
+        return archivePost;
+    }
+
+    public List<Story> getArchiveStory() {
+        return archiveStory;
     }
 
     public List<Post> getSaved() {
@@ -97,10 +105,28 @@ public class Account {
         return allComments;
     }
 
+    public Story getStory() {
+        return story;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
+    }
+
     // just to know who is this account :)
 
     @Override
     public String toString() {
         return username;
     }
+
+
+    public void archiveStory() {
+        if (this.story.getTime().getHour() == 23) {
+            archiveStory.add(this.story);
+        }
+
+    }
+
+
 }
