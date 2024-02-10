@@ -1,6 +1,7 @@
 package com.example.instagramproj.model;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 
@@ -8,13 +9,22 @@ public class Direct {
 
 
     private Account toAccount;
+    private Account fromAccount;
 
     // when , who send what ? !
-    private final Map<LocalDateTime,Map<Account,List<String>>> chats = new HashMap<>();
+    private final Map<LocalTime, Map<Account,  String>> chats = new HashMap<>();
 
 
-    public Map<LocalDateTime, Map<Account, List<String>>> getChats() {
+    public Map<LocalTime, Map<Account, String>> getChats() {
         return chats;
+    }
+
+    public Direct(Account from , Account to){
+        this.toAccount = to;
+        this.fromAccount = from;
+    }
+    public Direct(){
+
     }
 
     public Account getToAccount() {
@@ -23,5 +33,13 @@ public class Direct {
 
     public void setToAccount(Account toAccount) {
         this.toAccount = toAccount;
+    }
+
+    public Account getFromAccount() {
+        return fromAccount;
+    }
+
+    public void setFromAccount(Account fromAccount) {
+        this.fromAccount = fromAccount;
     }
 }

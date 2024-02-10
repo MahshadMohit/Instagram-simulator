@@ -37,6 +37,7 @@ public class Account  {
     private Image profile;
 
 
+
     private final List<Account> followers = new ArrayList<>();
     private final List<Account> following = new ArrayList<>();
     private final List<Account> closeFriends = new ArrayList<>();
@@ -44,6 +45,7 @@ public class Account  {
     private final List<Post> posts = new ArrayList<>();
     private final List<Post> archivePost = new ArrayList<>();
     private final List<Post> saved = new ArrayList<>();
+    private final List<Direct> directs = new ArrayList<>();
     private String bio;
 
     private Story story;
@@ -162,4 +164,7 @@ public class Account  {
 
     }
 
+    public List<Direct> getDirects() {
+        return directs;
+    }
 }
