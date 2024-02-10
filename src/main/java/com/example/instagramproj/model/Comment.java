@@ -11,6 +11,12 @@ public class Comment {
         likes = 0;
 
     }
+    public Comment(String text , Account account , Post post){
+        this.text = text;
+        this.account= account;
+        this.post = post;
+        likes = 0;
+    }
 
     public String getText() {
         return text;

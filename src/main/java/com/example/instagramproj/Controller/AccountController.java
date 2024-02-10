@@ -87,6 +87,8 @@ public class AccountController {
     }
 
 
+    // personal function
+
     public void editProfile(Account account , Image img){
         for (Account ac : accounts){
             if (ac.equals(account)){
@@ -129,6 +131,9 @@ public class AccountController {
             }
         }
     }
+
+
+    // TODO : block function
 
 
 
