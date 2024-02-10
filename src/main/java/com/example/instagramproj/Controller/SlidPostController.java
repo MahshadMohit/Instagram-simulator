@@ -1,4 +1,4 @@
 package com.example.instagramproj.Controller;
 
-public class SlidPostController {
+public class SlidPostController extends PostController{
 }

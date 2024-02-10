@@ -2,7 +2,7 @@ package com.example.instagramproj.model;
 
 import java.util.*;
 
-public class Account {
+public class Account  {
 
     public Account() {
 
@@ -11,6 +11,21 @@ public class Account {
     public Account(String username) {
         this.username = username;
     }
+
+    public Account(String username, String password, String name, int phonenumber) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.phoneNumber = String.valueOf(phonenumber);
+    }
+
+    public Account(String username, String password, String name, String email) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+    }
+
 
     private String username;
     private String name;
@@ -22,6 +37,7 @@ public class Account {
     private final List<Account> followers = new ArrayList<>();
     private final List<Account> following = new ArrayList<>();
     private final List<Account> closeFriends = new ArrayList<>();
+    private final Map<Account, Boolean> requests = new HashMap<>();
     private final List<Post> posts = new ArrayList<>();
     private final List<Post> archivePost = new ArrayList<>();
     private final List<Post> saved = new ArrayList<>();
@@ -113,6 +129,10 @@ public class Account {
         this.story = story;
     }
 
+    public Map<Account, Boolean> getRequests() {
+        return this.requests;
+    }
+
     // just to know who is this account :)
 
     @Override
@@ -127,6 +147,5 @@ public class Account {
         }
 
     }
-
 
 }

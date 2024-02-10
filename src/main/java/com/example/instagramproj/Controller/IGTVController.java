@@ -1,4 +1,5 @@
 package com.example.instagramproj.Controller;
 
-public class IGTVController {
+
+public class IGTVController extends PostController {
 }

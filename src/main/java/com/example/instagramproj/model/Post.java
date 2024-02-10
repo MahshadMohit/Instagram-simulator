@@ -5,10 +5,10 @@ import java.util.*;
 
 public class Post {
 
-    private  LocalDateTime time;
-    private final List<String> caption = new ArrayList<>();
+    private LocalDateTime time;
+    private StringBuilder caption = new StringBuilder();
     private final int likes;
-    private final Map<Account,Comment> commentMap = new HashMap<>();
+    private final Map<Account, Comment> commentMap = new HashMap<>();
     private final Account account;
 
 
@@ -27,8 +27,11 @@ public class Post {
         this.time = time;
     }
 
-    public List<String> getCaption() {
+    public StringBuilder getCaption() {
         return caption;
+    }
+    public void setCaption(StringBuilder sb){
+        this.caption = sb;
     }
 
     public int getLikes() {
