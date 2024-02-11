@@ -67,6 +67,7 @@ public class AccountController {
                 a.getRequests().replace(b, check);
                 if (check) {
                     a.getFollowers().add(b);
+                    a.getFeed().recentFollows.add(b);
                 }
             }
         }
@@ -74,6 +75,7 @@ public class AccountController {
 
     public void removeFollower(Account a, Account b) {
         a.getFollowers().remove(b);
+        a.getFeed().recentFollows.remove(b);
     }
 
     public void removeFollowing(Account a, Account b) {

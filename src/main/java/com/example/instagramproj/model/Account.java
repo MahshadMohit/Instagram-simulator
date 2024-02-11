@@ -35,6 +35,7 @@ public class Account  {
     private String email;
     private String phoneNumber;
     private Image profile;
+    private  Feed feed;
 
 
 
@@ -97,6 +98,12 @@ public class Account  {
 
     public String getEmail() {
         return email;
+    }
+    public Feed getFeed(){
+        return this.feed;
+    }
+    public void setFeed(Feed f){
+        this.feed = f;
     }
 
 

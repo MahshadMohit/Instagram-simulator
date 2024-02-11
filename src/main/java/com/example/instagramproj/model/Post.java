@@ -1,5 +1,7 @@
 package com.example.instagramproj.model;
 
+import javafx.scene.image.Image;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -10,6 +12,7 @@ public class Post {
     private final int likes;
     private final Map<Account, Comment> commentMap = new HashMap<>();
     private final Account account;
+    private Image img;
 
 
     public Post(Account a) {
@@ -44,5 +47,13 @@ public class Post {
 
     public Account getAccount() {
         return account;
+    }
+
+    public Image getImg() {
+        return img;
+    }
+
+    public void setImg(Image img) {
+        this.img = img;
     }
 }

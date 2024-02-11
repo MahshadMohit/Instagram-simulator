@@ -11,45 +11,44 @@ public class CommentController {
     public final static List<Post> posts = new ArrayList<>();
 
 
-    public void deleteComment(Comment cmnt , Post p){
-        for (Post post : posts){
-            if (post.equals(p)){
+    public void deleteComment(Comment cmnt, Post p) {
+        for (Post post : posts) {
+            if (post.equals(p)) {
                 post.getCommentMap().values().remove(cmnt);
+                p.getAccount().getFeed().recentComments.remove(cmnt.getAccount(),cmnt);
             }
         }
     }
 
-    public void commentOnPost(Account account,Comment comment , Post post){
-        for (Post p : posts){
-            if (p.equals(post)){
-                p.getCommentMap().put(account,comment);
+    private void commentOnPost(Comment comment) {
+        for (Post p : posts) {
+            if (p.equals(comment.getPost())) {
+                p.getCommentMap().put(comment.getAccount(), comment);
+                p.getAccount().getFeed().recentComments.put(comment.getAccount(), comment);
             }
         }
     }
-    public void comment(String text , Post post , Account account){
-        Comment comment = new Comment(text,account,post);
-        post.getCommentMap().put(account,comment);
 
-        for (Post p : account.getAllComments().keySet()){
-            if (p.equals(post)){
+    public void comment(String text, Post post, Account account) {
+        Comment comment = new Comment(text, account, post);
+        commentOnPost(comment);
+
+        for (Post p : account.getAllComments().keySet()) {
+            if (p.equals(post)) {
                 account.getAllComments().get(p).add(comment);
-            }else{
+            } else {
                 List<Comment> comments = new ArrayList<>();
                 comments.add(comment);
-                account.getAllComments().put(p,comments);
+                account.getAllComments().put(p, comments);
             }
         }
 
 
     }
 
-    public int showLikes(Comment comment){
+    public int showLikes(Comment comment) {
         return comment.getLikes();
     }
-
-
-
-
 
 
 }
