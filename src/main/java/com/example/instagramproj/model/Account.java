@@ -7,7 +7,6 @@ import java.util.*;
 public class Account  {
 
     public Account() {
-
     }
 
     public Account(String username) {
@@ -36,6 +35,7 @@ public class Account  {
     private String phoneNumber;
     private Image profile;
     private  Feed feed;
+    private AccountPrivacy check;
 
 
 
@@ -47,14 +47,15 @@ public class Account  {
     private final List<Post> archivePost = new ArrayList<>();
     private final List<Post> saved = new ArrayList<>();
     private final List<Direct> directs = new ArrayList<>();
+    private final List<Account> toRequests = new ArrayList<>();
     private String bio;
-
     private Story story;
 
 
     private final Map<Post, List<Comment>> allComments = new HashMap<>();
     private final List<Story> archiveStory = new ArrayList<>();
     private final List<String> links = new ArrayList<>();
+    private final List<Post> scrolPage = new ArrayList<>();
 
 
     public String getUsername() {
@@ -105,6 +106,16 @@ public class Account  {
     public void setFeed(Feed f){
         this.feed = f;
     }
+    public AccountPrivacy getCheck(){
+        return this.check;
+    }
+    public void setCheck(AccountPrivacy check){
+        this.check = check;
+    }
+
+    public List<Post> getScrolPage(){
+        return this.scrolPage;
+    }
 
 
     public String getPhoneNumber() {
@@ -154,6 +165,9 @@ public class Account  {
 
     public Map<Account, Boolean> getRequests() {
         return this.requests;
+    }
+    public List<Account> getToRequests(){
+        return this.toRequests;
     }
 
     // just to know who is this account :)

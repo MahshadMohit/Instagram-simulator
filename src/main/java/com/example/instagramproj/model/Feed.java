@@ -8,6 +8,7 @@ public class Feed {
     public Map<Account, Post> recentLikes = new HashMap<>();
     public Map<Account, Comment> recentComments = new HashMap<>();
     public final Account account;
+    public final List<Account> requests = new ArrayList<>();
 
 
     public Feed(Account account) {

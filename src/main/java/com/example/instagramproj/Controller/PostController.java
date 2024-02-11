@@ -11,6 +11,10 @@ public class PostController {
 
     public static void addPost(Account a, Post post) {
         a.getPosts().add(post);
+        a.getScrolPage().add(post);
+        for (Account ac : a.getFollowers()){
+            ac.getScrolPage().add(post);
+        }
     }
 
     public static void setPostArchieve(Account a, Post p) {
