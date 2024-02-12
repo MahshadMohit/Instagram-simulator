@@ -8,10 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -141,16 +138,21 @@ public class AccountPage implements Initializable {
     }
 
     public void seeFollowers(MouseEvent mouseEvent) {
+        ScrollPane scroll = new ScrollPane();
+        scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         HBox hBox = new HBox();
+        scroll.setContent(hBox);
         hBox.setAlignment(Pos.CENTER_LEFT);
         for (Account ac : account.getFollowers()){
             VBox vBox = new VBox();
             vBox.setAlignment(Pos.TOP_LEFT);
             ImageView imgView = new ImageView();
-            imgView.setFitWidth(20);
-            imgView.setFitHeight(20);
+            imgView.setFitWidth(50);
+            imgView.setFitHeight(50);
             setProfile(imgView,ac);
-            Button btn = new Button("unfollow");
+            Button btn = new Button("remove");
+            btn.setMinSize(40,20);
             vBox.getChildren().addAll(imgView,new Text(ac.getUsername()),btn);
             vBox.setSpacing(3);
             hBox.getChildren().add(vBox);
@@ -165,8 +167,46 @@ public class AccountPage implements Initializable {
 
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Your followers : ");
 
+        alert.setTitle("Your followers : ");
+        alert.getDialogPane().getChildren().add(hBox);
+        alert.getDialogPane().getChildren().get(3).setLayoutX(40);
+        alert.getDialogPane().getChildren().get(3).setLayoutY(50);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            System.out.println(account.getFollowers().size());
+        }else{
+            System.out.println("Hey done");
+        }
+        followerNum.setText(String.valueOf(account.getFollowers().size()));
+    }
+
+    public void seeFollowing(MouseEvent mouseEvent) {
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        for (Account ac : account.getFollowing()){
+            VBox vBox = new VBox();
+            vBox.setAlignment(Pos.TOP_LEFT);
+            ImageView imgView = new ImageView();
+            imgView.setFitWidth(20);
+            imgView.setFitHeight(20);
+            setProfile(imgView,ac);
+            Button btn = new Button("unfollow");
+            vBox.getChildren().addAll(imgView,new Text(ac.getUsername()),btn);
+            vBox.setSpacing(3);
+            hBox.getChildren().add(vBox);
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    account.getFollowing().remove(ac);
+                    ac.getFollowers().remove(account);
+                    hBox.getChildren().remove(vBox);
+                }
+            });
+
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Your following : ");
         alert.getDialogPane().getChildren().add(hBox);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){

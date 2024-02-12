@@ -62,7 +62,7 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="79.0" prefWidth="75.0" spacing="7.0">
                      <children>
-                        <Text fx:id="followingNum" strokeType="OUTSIDE" strokeWidth="0.0" text="472">
+                        <Text fx:id="followingNum" onMouseClicked="#seeFollowing" strokeType="OUTSIDE" strokeWidth="0.0" text="472">
                            <font>
                               <Font name="Tw Cen MT Bold" size="16.0" />
                            </font>
