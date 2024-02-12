@@ -213,7 +213,10 @@ public class FirstPage implements Initializable {
     public void setSignup(ActionEvent e) throws IOException {
         signup();
         FXMLLoader fxmlLoader = new FXMLLoader(InstagramApplication.class.getResource("accountPage.fxml"));
-        AccountPage.account = account;
+        AccountPage.account = new Account("Asoo","Asoo","Asoo",123);
+        Account ac1 = new Account("Mahshad","Mahshad","Mahshad",12222);
+        AccountPage.account.getFollowers().add(ac1);
+        ac1.getFollowing().add(AccountPage.account);
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.setScene(scene);

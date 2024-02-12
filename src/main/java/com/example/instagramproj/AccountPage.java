@@ -1,5 +1,6 @@
 package com.example.instagramproj;
 
+import com.example.instagramproj.Controller.AccountController;
 import com.example.instagramproj.model.Account;
 import com.example.instagramproj.model.Story;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
@@ -29,6 +31,7 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AccountPage implements Initializable {
@@ -68,6 +71,7 @@ public class AccountPage implements Initializable {
     @FXML
     private VBox mainVbox;
     public static Account account;
+    public AccountController controller = new AccountController();
 
     private void setProfile(ImageView view, Account ac) {
         if (ac.getProfile() == null) {
@@ -135,6 +139,44 @@ public class AccountPage implements Initializable {
         // TODO : choose image from file explore and add to it
         // todo : show other stories
     }
+
+    public void seeFollowers(MouseEvent mouseEvent) {
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        for (Account ac : account.getFollowers()){
+            VBox vBox = new VBox();
+            vBox.setAlignment(Pos.TOP_LEFT);
+            ImageView imgView = new ImageView();
+            imgView.setFitWidth(20);
+            imgView.setFitHeight(20);
+            setProfile(imgView,ac);
+            Button btn = new Button("unfollow");
+            vBox.getChildren().addAll(imgView,new Text(ac.getUsername()),btn);
+            vBox.setSpacing(3);
+            hBox.getChildren().add(vBox);
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    account.getFollowers().remove(ac);
+                    ac.getFollowing().remove(account);
+                    hBox.getChildren().remove(vBox);
+                }
+            });
+
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Your followers : ");
+
+        alert.getDialogPane().getChildren().add(hBox);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            System.out.println(account.getFollowers().size());
+        }else{
+            System.out.println("Hey done");
+        }
+        followerNum.setText(String.valueOf(account.getFollowers().size()));
+    }
+
 
 
     @Override

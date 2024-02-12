@@ -90,6 +90,7 @@ public class AccountController {
 
     public void removeFollower(Account a, Account b) {
         a.getFollowers().remove(b);
+        b.getFollowing().remove(a);
         a.getFeed().recentFollows.remove(b);
     }
 
