@@ -21,10 +21,10 @@ public class AccountController {
 
     }
 
-    public boolean signupEmail(String username, String password, String name, String email) {
+    public Account signupEmail(String username, String password, String name, String email) {
         Account account = new Account(username, password, name, email);
         account.setCheck(AccountPrivacy.PUBLIC);
-        return accounts.contains(account);
+        return account;
 
     }
 
