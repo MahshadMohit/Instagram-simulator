@@ -13,7 +13,10 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -227,6 +230,35 @@ public class FirstPage implements Initializable {
         //login();
     }
 
+    public void setEffect(Button btn){
+
+        DropShadow ds = new DropShadow();
+        ds.setBlurType(BlurType.GAUSSIAN);
+        ds.setWidth(42.41);
+        ds.setHeight(32.68);
+        ds.setRadius(11.94);
+        ds.setOffsetX(0);
+        ds.setOffsetY(0);
+        ds.setSpread(0.15);
+        btn.setEffect(ds);
+
+    }
+    public void setNoEffect(Node node){
+        node.setEffect(null);
+    }
+    public void setStarted(MouseEvent mouseEvent) {
+        setEffect(signup);
+    }
+    public void setExited(MouseEvent mouseEvent) {
+        setNoEffect(signup);
+    }
+
+    public void setStarted2(MouseEvent mouseEvent) {
+        setEffect(login);
+    }
+    public void setExited2(MouseEvent mouseEvent) {
+        setNoEffect(login);
+    }
 
 
     @Override

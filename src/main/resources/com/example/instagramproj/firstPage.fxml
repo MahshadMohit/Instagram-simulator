@@ -6,12 +6,12 @@
 
 <AnchorPane fx:id="pane" prefHeight="576.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.instagramproj.FirstPage">
    <children>
-      <Button fx:id="signup" onAction="#setSignup" layoutX="486.0" layoutY="424.0" mnemonicParsing="false" opacity="0.78" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #d40e89;" text="sign up" textFill="WHITE">
+      <Button fx:id="signup" onMouseEntered="#setStarted" onMouseExited="#setExited" onAction="#setSignup" layoutX="486.0" layoutY="424.0" mnemonicParsing="false" opacity="0.78" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #d40e89;" text="sign up" textFill="WHITE">
          <font>
             <Font name="Tw Cen MT" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="login" onAction="#setLogin" layoutX="486.0" layoutY="461.0" mnemonicParsing="false" opacity="0.78" prefHeight="22.0" prefWidth="90.0" style="-fx-background-color: #d40e89;" text="log in" textFill="WHITE">
+      <Button fx:id="login" onMouseEntered="#setStarted2" onMouseExited="#setExited2" onAction="#setLogin" layoutX="486.0" layoutY="461.0" mnemonicParsing="false" opacity="0.78" prefHeight="22.0" prefWidth="90.0" style="-fx-background-color: #d40e89;" text="log in" textFill="WHITE">
          <font>
             <Font name="Tw Cen MT" size="16.0" />
          </font>

@@ -16,10 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -54,6 +51,7 @@ public class AccountPage implements Initializable {
     public VBox firstVboxStory;
     public Circle addStoryCircle;
     public Text addStoryTxt;
+    public AnchorPane pane;
     @FXML
     private Circle circle;
 
@@ -128,10 +126,35 @@ public class AccountPage implements Initializable {
     }
 
     public void setAddHighligh(MouseEvent mouseEvent) {
-       // TODO : add story images to a dialog
+        //  add story images to a dialog
+        // 1303/22/22
+        double x = addHighlightTxt.getLayoutX();
+        double y = addHighlightTxt.getLayoutY();
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        for (Story s : account.getArchiveStory()) {
+            VBox vBox = new VBox();
+            vBox.setAlignment(Pos.TOP_CENTER);
+            vBox.setSpacing(2);
+            ImageView view = new ImageView(s.getImage());
+            view.setFitHeight(50);
+            view.setFitWidth(50);
+            Text text = new Text(s.getTime().getYear() + "/" + s.getTime().getMonthValue() + "/" + s.getTime().getDayOfMonth());
+            vBox.getChildren().addAll(view, text);
+            hBox.getChildren().add(vBox);
+        }
+
+        ScrollPane scroll = new ScrollPane();
+        scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroll.setContent(hBox);
+        scroll.setLayoutX(x);
+        scroll.setLayoutY(y+260);
+        pane.getChildren().add(scroll);
 
 
     }
+
     public void setAddStory(MouseEvent mouseEvent) {
         // TODO : choose image from file explore and add to it
         // todo : show other stories
@@ -144,16 +167,16 @@ public class AccountPage implements Initializable {
         HBox hBox = new HBox();
         scroll.setContent(hBox);
         hBox.setAlignment(Pos.CENTER_LEFT);
-        for (Account ac : account.getFollowers()){
+        for (Account ac : account.getFollowers()) {
             VBox vBox = new VBox();
             vBox.setAlignment(Pos.TOP_LEFT);
             ImageView imgView = new ImageView();
             imgView.setFitWidth(50);
             imgView.setFitHeight(50);
-            setProfile(imgView,ac);
+            setProfile(imgView, ac);
             Button btn = new Button("remove");
-            btn.setMinSize(40,20);
-            vBox.getChildren().addAll(imgView,new Text(ac.getUsername()),btn);
+            btn.setMinSize(40, 20);
+            vBox.getChildren().addAll(imgView, new Text(ac.getUsername()), btn);
             vBox.setSpacing(3);
             hBox.getChildren().add(vBox);
             btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -173,9 +196,9 @@ public class AccountPage implements Initializable {
         alert.getDialogPane().getChildren().get(3).setLayoutX(40);
         alert.getDialogPane().getChildren().get(3).setLayoutY(50);
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             System.out.println(account.getFollowers().size());
-        }else{
+        } else {
             System.out.println("Hey done");
         }
         followerNum.setText(String.valueOf(account.getFollowers().size()));
@@ -184,15 +207,15 @@ public class AccountPage implements Initializable {
     public void seeFollowing(MouseEvent mouseEvent) {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
-        for (Account ac : account.getFollowing()){
+        for (Account ac : account.getFollowing()) {
             VBox vBox = new VBox();
             vBox.setAlignment(Pos.TOP_LEFT);
             ImageView imgView = new ImageView();
             imgView.setFitWidth(20);
             imgView.setFitHeight(20);
-            setProfile(imgView,ac);
+            setProfile(imgView, ac);
             Button btn = new Button("unfollow");
-            vBox.getChildren().addAll(imgView,new Text(ac.getUsername()),btn);
+            vBox.getChildren().addAll(imgView, new Text(ac.getUsername()), btn);
             vBox.setSpacing(3);
             hBox.getChildren().add(vBox);
             btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -209,14 +232,13 @@ public class AccountPage implements Initializable {
         alert.setTitle("Your following : ");
         alert.getDialogPane().getChildren().add(hBox);
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             System.out.println(account.getFollowers().size());
-        }else{
+        } else {
             System.out.println("Hey done");
         }
         followerNum.setText(String.valueOf(account.getFollowers().size()));
     }
-
 
 
     @Override
@@ -247,7 +269,6 @@ public class AccountPage implements Initializable {
 
 
     }
-
 
 
 }
